@@ -1,0 +1,7 @@
+ip5 ip2
+ip5 ip3
+ip4 ip1
+ip1 ip4
+ip3 ip11
+ip11 ip12
+ip11 ip3
