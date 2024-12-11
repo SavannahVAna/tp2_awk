@@ -2,22 +2,40 @@
 
 @include "common.awk"
 
-BEGIN {
-	print("BEGIN test");
+BEGINFILE{
+	flag = 0;
+	host = 0;
+	it = 0;
+	flag = 0
+	vlan = 0
 }
 
-BEGINFILE {
-	print("begin processing file: ", FILENAME);
+
+/hostname/{
+	host = $2;
 }
 
-/^interface.*$/ {
-	print_err("error detected",$0,FNR);
+#reste at interface
+/interface/{#tester flag a part
+	if ( flag == 1 && vlan !=0){
+		print host "-" it "-access-" vlan;
+	}
+	flag =0;
+	vlan =0
+
+	it = $2;
 }
 
-ENDFILE {
-	print("end processing file: ", FILENAME);
+/^ switchport mode access/{
+	flag =1;
 }
 
-END {
-	print("END test");
+/^ switchport access vlan/{
+	vlan = $4;
+}
+
+ENDFILE{
+	if ( flag == 1 && vlan !=0){
+		print host "-" it "-access-" vlan;
+	}
 }
