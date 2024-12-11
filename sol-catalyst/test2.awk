@@ -5,7 +5,15 @@ BEGIN{
 }
 
 {
-    liste[$1,$4] = 1;
-    liste_cat[$1] = 1;
-    liste_vlan[$4] = 1;
+    liste[$1,$4] = $2;
+}
+
+END{
+    for (id1 in liste) {
+        split(id1, parts1, ",");
+        #print(parts1[1] " " parts1[2] " access " parts1[3]);
+        for(id2 in liste){
+            
+        }
+    }
 }
