@@ -5,12 +5,4 @@ function print_err0(msg) {
 	print FILENAME";" msg ";;";
 }
 
-function keys(arr,k, idx) {
-    idx = 0;
-    for (k in arr) {
-        idx++;
-        keys[idx] = k;
-    }
-    return keys;
-}
 

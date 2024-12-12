@@ -1,19 +1,26 @@
 BEGIN{
     FS = "-";       # Séparateur d'entrée (champ d'entrée délimité par '-')
     OFS = "-";
-    cat = "";  
+    inde = 0;
+    print "g=DiGraph()";
 }
 
 {
-    liste[$1,$4] = $2;
+    liste[inde] = $0;
+    inde++;
 }
 
 END{
-    for (id1 in liste) {
-        split(id1, parts1, ",");
-        #print(parts1[1] " " parts1[2] " access " parts1[3]);
-        for(id2 in liste){
-            
+    for (i = 0; i < inde; i++) {   # Parcourir tous les indices de `liste`
+        split(liste[i], parts, FS);
+        for (j = 0; j < inde; j++) {
+            split(liste[j], parts2, FS);
+            if(parts[1]!=parts2[1] && parts[4] == parts2[4]){
+                print "g.add_edges([(\"" liste[i] "\",\"" liste[j]"\")])";
+                #print "g.add_edges([(\"" liste[j] "\",\"" liste[i]"\")])";
+            }
         }
     }
+    print "g.show( figsize=[15,15], edge_color=\"blue\", vertex_color=\"lightgreen\")";
+    print "g.connected_components()";
 }
