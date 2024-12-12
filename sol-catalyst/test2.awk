@@ -2,7 +2,7 @@ BEGIN{
     FS = "-";       # Séparateur d'entrée (champ d'entrée délimité par '-')
     OFS = "-";
     inde = 0;
-    print "g=DiGraph()";
+    print "g=Graph()";
 }
 
 {
@@ -21,6 +21,6 @@ END{
             }
         }
     }
-    print "g.show( figsize=[15,15], edge_color=\"blue\", vertex_color=\"lightgreen\")";
+    print "g.show( figsize=[20,20], edge_color=\"blue\", vertex_color=\"lightgreen\")";
     print "g.connected_components()";
 }
